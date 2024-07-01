@@ -1,5 +1,5 @@
 
-# PotatoEngine [alpha-stage]
+# PotatoEngine [alhpa-stage]
  **PotatoEngine** is a low level C++ game engine
 
 
@@ -19,6 +19,6 @@ A[Project] --> B[Scenes]
 B --> C[GameEntities]
 C --> D[Componentes]
 ```
-**Project** - central data structure, contains everything
-**Scenes** - Is a game level or a chunk of the world
+**Project** - central data structure, contains everything.<br />
+**Scenes** - Is a game level or a chunk of the world.
 
