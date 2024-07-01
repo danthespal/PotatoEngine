@@ -1,14 +1,6 @@
 ﻿using PotatoEngine_LevelEditor.GameProject;
-using System.Text;
+using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PotatoEngine_LevelEditor
 {
@@ -21,6 +13,7 @@ namespace PotatoEngine_LevelEditor
         {
             InitializeComponent();
             Loaded += OnMainWindowLoaded;
+            Closing += OnMainWindowClosing;
         }
 
         private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
@@ -29,16 +22,23 @@ namespace PotatoEngine_LevelEditor
             OpenProjectBrowserDialog();
         }
 
+        private void OnMainWindowClosing(object? sender, CancelEventArgs e)
+        {
+            Closing -= OnMainWindowClosing;
+            Project.Current?.Unload();
+        }
+
         private void OpenProjectBrowserDialog()
         {
             var projectBrowser = new ProjectBrowserDialog();
-            if (projectBrowser.ShowDialog() == false)
+            if (projectBrowser.ShowDialog() == false || projectBrowser.DataContext == null)
             {
                 Application.Current.Shutdown();
             }
             else
             {
-
+                Project.Current?.Unload();
+                DataContext = projectBrowser.DataContext;
             }
         }
     }

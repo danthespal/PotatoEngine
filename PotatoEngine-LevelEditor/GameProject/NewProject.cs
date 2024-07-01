@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PotatoEngine_LevelEditor.Utilities;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using PotatoEngine_LevelEditor;
-using PotatoEngine_LevelEditor.Utilities;
 
 namespace PotatoEngine_LevelEditor.GameProject
 {
@@ -19,8 +11,10 @@ namespace PotatoEngine_LevelEditor.GameProject
     {
         [DataMember]
         public string ProjectType { get; set; }
+
         [DataMember]
         public string ProjectFile { get; set; }
+
         [DataMember]
         public List<string> Folders { get; set; }
 

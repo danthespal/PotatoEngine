@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Runtime.Serialization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PotatoEngine_LevelEditor.GameProject
 {
@@ -12,7 +7,6 @@ namespace PotatoEngine_LevelEditor.GameProject
     public class Scene : ViewModelBase
     {
         private string _name;
-
         [DataMember]
         public string Name
         {
@@ -29,6 +23,21 @@ namespace PotatoEngine_LevelEditor.GameProject
 
         [DataMember]
         public Project Project { get; private set; }
+
+        private bool _isActive;
+        [DataMember]
+        public bool IsActive
+        {
+            get => _isActive;
+            set
+            {
+                if (_isActive != value)
+                {
+                    _isActive = value;
+                    OnPropertyChanged(nameof(IsActive));
+                }
+            }
+        }
 
         public Scene(Project project, string name)
         {
