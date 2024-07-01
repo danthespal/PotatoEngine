@@ -19,4 +19,3 @@ C --> D[Components]
 ```
 **Project** - central data structure, contains everything.<br />
 **Scenes** - Is a game level or a chunk of the world.
-
