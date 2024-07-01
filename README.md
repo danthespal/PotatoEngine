@@ -17,7 +17,7 @@ A --> D
 graph LR
 A[Project] --> B[Scenes]
 B --> C[GameEntities]
-C --> D[Componentes]
+C --> D[Components]
 ```
 **Project** - central data structure, contains everything.<br />
 **Scenes** - Is a game level or a chunk of the world.
