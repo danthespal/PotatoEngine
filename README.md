@@ -1,6 +1,7 @@
 
-# PotatoEngine [alhpa-stage]
- **PotatoEngine** is a low level C++ game engine
+
+![PotatoEngine-Logo](https://i.ibb.co/Gcx0pvS/Potato-Engine-Logo.png)
+***<p style="text-align: center;">a low level C++ game engine</p>***
 <br />
 
 ## Engine Structure
