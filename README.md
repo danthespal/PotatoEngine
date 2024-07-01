@@ -1,5 +1,5 @@
 
-# PotatoEngine [alhpa-stage]
+# PotatoEngine [alpha-stage]
  **PotatoEngine** is a low level C++ game engine
 
 
