@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization;
+using System.Windows.Shapes;
 
 namespace PotatoEngine_LevelEditor.GameProject
 {
@@ -94,7 +95,8 @@ namespace PotatoEngine_LevelEditor.GameProject
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                // TODO: log errors
+                Logger.Log(MessageType.Error, $"Failed to read project data");
+                throw;
             }
         }
     }
