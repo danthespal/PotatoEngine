@@ -23,3 +23,30 @@ C --> D[Components]
 
 **Project** - central data structure, contains everything.<br />
 **Scenes** - Is a game level or a chunk of the world.
+<br />
+
+## GameEntity Structure
+```mermaid
+graph LR
+A[GameEntity] --> B[Entity Type 1]
+A --> C[Entity Type 2]
+A --> D[Entity Type 3]
+A --> E[Components]
+E --> F[Transform]
+E --> G[Script]
+E --> H[Geometry]
+E --> I[RigiBody]
+```
+
+## Multiselect GameEntity Structure
+```mermaid
+graph LR
+A[Multiselect GameEntity] --> B[Multiselect Entity Type 1]
+A --> C[Multiselect  Entity Type 2]
+A --> D[Multiselect  Entity Type 3]
+A --> E[Multiselect Components]
+E --> F[MSTransform]
+E --> G[MSScript]
+E --> H[MSGeometry]
+E --> I[MSRigiBody]
+```
