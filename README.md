@@ -1,5 +1,3 @@
-
-
 ![PotatoEngine-Logo](https://i.ibb.co/Gcx0pvS/Potato-Engine-Logo.png)
 ***<p style="text-align: center;">a low level C++ game engine</p>***
 <br />
@@ -49,4 +47,14 @@ E --> F[MSTransform]
 E --> G[MSScript]
 E --> H[MSGeometry]
 E --> I[MSRigiBody]
+```
+
+## PotatoEngine-Lib (Data Oriented Design)
+```markdown
+| Entity ids    | 001 | 002 | 003 | 004 | 005 | 006 | 007 | 008 | 009 | etc |
+|---------------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| Transform ids | 001 | 002 | 003 | 004 | 005 | 006 | 007 | 008 | 009 | etc |
+| Script ids    | -1  | -1  | 001 | -1  | 002 | -1  | -1  | 003 | -1  | etc |
+| Geometry ids  | 001 | 002 | -1  | 003 | 004 | 005 | 006 | -1  | -1  | etc |
+| Rigibody ids  | -1  | -1  | -1  | 001 | 002 | -1  | 003 | -1  | -1  | etc |
 ```
