@@ -64,13 +64,13 @@ namespace PotatoEngine_LevelEditor.Utilities
 
         public void Undo()
         {
-            if(_undoList.Any())
+            if (_undoList.Any())
             {
                 var cmd = _undoList.Last();
                 _undoList.RemoveAt(_undoList.Count - 1);
                 cmd.Undo();
                 _rendoList.Insert(0, cmd);
-            }    
+            }
         }
 
         public void Redo()

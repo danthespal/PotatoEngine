@@ -36,7 +36,7 @@ namespace PotatoEngine_LevelEditor.GameProject
         private static readonly string _applicationDataPath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\PotatoEngine-LevelEditor\";
         private static readonly string _projectDataPath;
         private static readonly ObservableCollection<ProjectData> _projects = new ObservableCollection<ProjectData>();
-        public static ReadOnlyObservableCollection<ProjectData> Projects 
+        public static ReadOnlyObservableCollection<ProjectData> Projects
         { get; }
 
         private static void ReadProjectData()
