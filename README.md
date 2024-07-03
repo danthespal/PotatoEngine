@@ -50,6 +50,7 @@ E --> I[MSRigiBody]
 ```
 
 ## PotatoEngine (Data Oriented Design)
+source: http://bitsquid.blogspot.com/2011/09/managing-decoupling-part-4-id-lookup.html
 | Entity ids    | 001 | 002 | 003 | 004 | 005 | 006 | 007 | 008 | 009 | etc |
 |---------------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
 | Transform ids | 001 | 002 | 003 | 004 | 005 | 006 | 007 | 008 | 009 | etc |
