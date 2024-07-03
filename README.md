@@ -49,7 +49,7 @@ E --> H[MSGeometry]
 E --> I[MSRigiBody]
 ```
 
-## PotatoEngine-Lib (Data Oriented Design)
+## PotatoEngine (Data Oriented Design)
 | Entity ids    | 001 | 002 | 003 | 004 | 005 | 006 | 007 | 008 | 009 | etc |
 |---------------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
 | Transform ids | 001 | 002 | 003 | 004 | 005 | 006 | 007 | 008 | 009 | etc |
