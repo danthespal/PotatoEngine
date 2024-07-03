@@ -49,9 +49,6 @@ namespace PotatoEngineEditor.Components
         private readonly ObservableCollection<Component> _components = new ObservableCollection<Component>();
         public ReadOnlyObservableCollection<Component> Components { get; private set; }
 
-        public ICommand RenameCommand { get; private set; }
-        public ICommand IsEnabledCommand { get; private set; }
-
         [OnDeserialized]
         void OnDeserialized(StreamingContext context)
         {
@@ -60,24 +57,6 @@ namespace PotatoEngineEditor.Components
                 Components = new ReadOnlyObservableCollection<Component>(_components);
                 OnPropertyChanged(nameof(Components));
             }
-
-            RenameCommand = new RelayCommand<string>(x =>
-            {
-                var oldName = _name;
-                Name = x;
-
-                Project.UndoRedo.Add(new UndoRedoAction(nameof(Name), this,
-                    oldName, x, $"Rename entity '{oldName}' to '{x}'"));
-            }, x => x != _name);
-
-            IsEnabledCommand = new RelayCommand<bool>(x =>
-            {
-                var oldValue = _isEnabled;
-                IsEnabled = x;
-
-                Project.UndoRedo.Add(new UndoRedoAction(nameof(IsEnabled), this,
-                    oldValue, x, x ? $"Enable {Name}" : $"Disable {Name}"));
-            });
         }
 
         public GameEntity(Scene scene)
