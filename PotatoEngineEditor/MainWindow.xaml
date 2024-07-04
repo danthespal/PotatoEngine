@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PotatoEngineEditor"
         xmlns:editors="clr-namespace:PotatoEngineEditor.Editors"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="PotatoEngine Editor" Height="1080" Width="1920">
+        Title="PotatoEngine Editor" Height="1080" Width="1920"
+        Style="{StaticResource PotatoWindowStyle}">
     <Grid>
         <editors:WorldEditorView />
     </Grid>
