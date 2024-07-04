@@ -45,6 +45,7 @@ namespace PotatoEngineEditor.Editors
             MSGameEntity msEntity = null;
             if (newSelection.Any())
             {
+                listBox.Focus();
                 msEntity = new MSGameEntity(newSelection);
             }
             GameEntityView.Instance.DataContext = msEntity;
