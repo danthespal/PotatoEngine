@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PotatoEngineEditor": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
