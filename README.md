@@ -57,3 +57,10 @@ source: http://bitsquid.blogspot.com/2011/09/managing-decoupling-part-4-id-looku
 | Script ids    | -1  | -1  | 001 | -1  | 002 | -1  | -1  | 003 | -1  | etc |
 | Geometry ids  | 001 | 002 | -1  | 003 | 004 | 005 | 006 | -1  | -1  | etc |
 | Rigibody ids  | -1  | -1  | -1  | 001 | 002 | -1  | 003 | -1  | -1  | etc |
+<br />
+
+## PotatoEngineEditor (Color Palette)
+![PotatoEngineEditor-ColorPalette](https://i.ibb.co/T4wVXW3/color-palette.png)
+**Gamma Encoding:** https://www.wildlifeinpixels.net/blog/gamma-encoding/
+**Window Chrome:** https://docs.microsoft.com/en-us/dotnet/api/system.windows.shell.windowchrome?view=netcore-3.1
+**WPS Functions:** https://docs.microsoft.com/en-us/dotnet/framework/wpf/graphics-multimedia/easing-functions
