@@ -61,6 +61,6 @@ source: http://bitsquid.blogspot.com/2011/09/managing-decoupling-part-4-id-looku
 
 ## PotatoEngineEditor (Color Palette)
 ![PotatoEngineEditor-ColorPalette](https://i.ibb.co/T4wVXW3/color-palette.png)
-**Gamma Encoding:** https://www.wildlifeinpixels.net/blog/gamma-encoding/
-**Window Chrome:** https://docs.microsoft.com/en-us/dotnet/api/system.windows.shell.windowchrome?view=netcore-3.1
-**WPS Functions:** https://docs.microsoft.com/en-us/dotnet/framework/wpf/graphics-multimedia/easing-functions
+**Gamma Encoding:** https://www.wildlifeinpixels.net/blog/gamma-encoding/<br />
+**Window Chrome:** https://docs.microsoft.com/en-us/dotnet/api/system.windows.shell.windowchrome?view=netcore-3.1<br />
+**WPS Functions:** https://docs.microsoft.com/en-us/dotnet/framework/wpf/graphics-multimedia/easing-functions<br />
