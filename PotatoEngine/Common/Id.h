@@ -1,4 +1,5 @@
 #pragma once
+
 #include "CommonHeaders.h"
 
 namespace PotatoEngine::id {

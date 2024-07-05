@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:PotatoEngineEditor.Utilities"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <UserControl.Resources>
         <Style TargetType="{x:Type ToggleButton}">
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>

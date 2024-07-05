@@ -10,6 +10,17 @@ utl::vector<id::id_type>				id_mapping;
 utl::vector<id::generation_type>		generations;
 utl::vector<script_id>					free_ids;
 
+using script_registery = std::unordered_map<size_t, detail::script_creator>;
+script_registery&
+registery()
+{
+	// NOTE: put this static variable in a function because of
+	//		 the initialization order of static data. this way
+	//		 can be certain that the data is initialized before accessing it.
+	static script_registery reg;
+	return reg;
+}
+
 bool
 exists(script_id id)
 {
@@ -22,6 +33,17 @@ exists(script_id id)
 		entity_scripts[id_mapping[index]]->is_valid();
 }
 } // anonymous namespace
+
+namespace detail {
+
+u8
+register_script(size_t tag, script_creator func)
+{
+	bool result{ registery().insert(script_registery::value_type{tag, func}).second };
+	assert(result);
+	return result;
+}
+} // namespace detail
 
 component
 create(init_info info, game_entity::entity entity)

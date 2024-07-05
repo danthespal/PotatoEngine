@@ -8,6 +8,7 @@
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="PotatoEngine Editor" Height="1080" Width="1920"
         Style="{StaticResource PotatoWindowStyle}">
+    
     <Grid>
         <editors:WorldEditorView />
     </Grid>
