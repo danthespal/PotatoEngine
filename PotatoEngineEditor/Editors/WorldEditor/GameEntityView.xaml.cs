@@ -5,14 +5,12 @@ using System.Windows.Controls;
 
 namespace PotatoEngineEditor.Editors
 {
-    /// <summary>
-    /// Interaction logic for GameEntityView.xaml
-    /// </summary>
     public partial class GameEntityView : UserControl
     {
         private Action _undoAction;
         private string _propertyName;
         public static GameEntityView Instance { get; private set; }
+
         public GameEntityView()
         {
             InitializeComponent();
@@ -51,6 +49,7 @@ namespace PotatoEngineEditor.Editors
 
         private void OnName_TextBox_GotKeyboardFocus(object sender, System.Windows.Input.KeyboardFocusChangedEventArgs e)
         {
+            _propertyName = string.Empty;
             _undoAction = GetRenameAction();
         }
 
