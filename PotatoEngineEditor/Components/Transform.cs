@@ -1,7 +1,6 @@
-﻿using System;
+﻿using PotatoEngineEditor.Utilities;
 using System.Numerics;
 using System.Runtime.Serialization;
-using PotatoEngineEditor.Utilities;
 
 namespace PotatoEngineEditor.Components
 {

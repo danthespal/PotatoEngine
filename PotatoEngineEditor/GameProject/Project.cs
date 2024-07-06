@@ -1,4 +1,5 @@
 ﻿using PotatoEngineEditor.Common;
+using PotatoEngineEditor.GameDev;
 using PotatoEngineEditor.Utilities;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -20,7 +21,9 @@ namespace PotatoEngineEditor.GameProject
         [DataMember]
         public string Path { get; private set; }
 
-        public string FullPath => $@"{Path}{Name}\{Name}{Extension}";
+        public string FullPath => $@"{Path}{Name}{Extension}";
+
+        public string Solution => $@"{Path}{Name}.sln";
 
         [DataMember(Name = "Scenes")]
         private ObservableCollection<Scene> _scenes = new ObservableCollection<Scene>();
@@ -71,6 +74,7 @@ namespace PotatoEngineEditor.GameProject
 
         public void Unload()
         {
+            VisualStudio.CloseVisualStudio();
             UndoRedo.Reset();
         }
 

@@ -1,13 +1,9 @@
-﻿using PotatoEngineEditor.GameProject;
-using System.Collections.Specialized;
+﻿using PotatoEngineEditor.GameDev;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace PotatoEngineEditor.Editors
 {
-    /// <summary>
-    /// Interaction logic for WorldEditorView.xaml
-    /// </summary>
     public partial class WorldEditorView : UserControl
     {
         public WorldEditorView()
@@ -20,6 +16,11 @@ namespace PotatoEngineEditor.Editors
         {
             Loaded -= OnWorldEditorViewLoaded;
             Focus();
+        }
+
+        private void OnNewScript_Button_Click(object sender, RoutedEventArgs e)
+        {
+            new NewScriptDialog().ShowDialog();
         }
     }
 }

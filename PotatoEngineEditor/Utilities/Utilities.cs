@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PotatoEngineEditor.Utilities
+﻿namespace PotatoEngineEditor.Utilities
 {
     public static class ID
     {
@@ -15,7 +9,7 @@ namespace PotatoEngineEditor.Utilities
     public static class MathUtil
     {
         public static float Epsilon => 0.00001f;
-        
+
         public static bool IsTheSameAs(this float value, float other)
         {
             return Math.Abs(value - other) < Epsilon;

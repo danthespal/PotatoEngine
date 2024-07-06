@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PotatoEngineEditor.Editors
 {
@@ -34,7 +22,7 @@ namespace PotatoEngineEditor.Editors
             set { SetValue(ComponentContentProperty, value); }
         }
 
-        public static readonly DependencyProperty ComponentContentProperty = 
+        public static readonly DependencyProperty ComponentContentProperty =
             DependencyProperty.Register(nameof(ComponentContent), typeof(FrameworkElement), typeof(ComponentView));
 
 

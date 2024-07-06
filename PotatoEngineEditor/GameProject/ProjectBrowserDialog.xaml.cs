@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PotatoEngineEditor.GameProject
 {
@@ -57,7 +48,7 @@ namespace PotatoEngineEditor.GameProject
             highlightAnimation.Completed += (s, e) =>
             {
                 var animation = new ThicknessAnimation(new Thickness(-1600, 0, 0, 0), new Thickness(0), new Duration(TimeSpan.FromSeconds(0.5)));
-                animation.EasingFunction= _easing;
+                animation.EasingFunction = _easing;
                 browserContent.BeginAnimation(MarginProperty, animation);
             };
             highlightRect.BeginAnimation(Canvas.LeftProperty, highlightAnimation);

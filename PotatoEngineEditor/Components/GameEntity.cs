@@ -5,7 +5,6 @@ using PotatoEngineEditor.Utilities;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Runtime.Serialization;
-using System.Windows.Input;
 
 namespace PotatoEngineEditor.Components
 {
@@ -179,7 +178,7 @@ namespace PotatoEngineEditor.Components
         public static bool? GetMixedValue<T>(List<T> objects, Func<T, bool> getProperty)
         {
             var value = getProperty(objects.First());
-            return objects.Skip(1).Any(x => value != getProperty(x)) ? (bool?)null: value;
+            return objects.Skip(1).Any(x => value != getProperty(x)) ? (bool?)null : value;
         }
 
         public static string GetMixedValue<T>(List<T> objects, Func<T, string> getProperty)
@@ -219,7 +218,7 @@ namespace PotatoEngineEditor.Components
             Debug.Assert(entities?.Any() == true);
             Components = new ReadOnlyObservableCollection<IMSComponent>(_components);
             SelectedEntities = entities;
-            PropertyChanged += (s, e) => { if(_enableUpdates) UpdateGameEntities(e.PropertyName); };
+            PropertyChanged += (s, e) => { if (_enableUpdates) UpdateGameEntities(e.PropertyName); };
         }
     }
 

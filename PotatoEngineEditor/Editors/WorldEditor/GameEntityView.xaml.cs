@@ -21,7 +21,7 @@ namespace PotatoEngineEditor.Editors
                 if (DataContext != null)
                 {
                     (DataContext as MSEntity).PropertyChanged += (s, e) => _propertyName = e.PropertyName;
-                }    
+                }
             };
         }
 

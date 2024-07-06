@@ -1,17 +1,10 @@
 ﻿using PotatoEngineEditor.Components;
 using PotatoEngineEditor.GameProject;
 using PotatoEngineEditor.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace PotatoEngineEditor.Editors
@@ -43,10 +36,10 @@ namespace PotatoEngineEditor.Editors
                 return null;
             }
 
-            var selection = vm.SelectedComponets.Select(x=>selector(x)).ToList();
+            var selection = vm.SelectedComponets.Select(x => selector(x)).ToList();
             return new Action(() =>
             {
-                selection.ForEach(x=>forEachAction(x));
+                selection.ForEach(x => forEachAction(x));
                 (GameEntityView.Instance.DataContext as MSEntity)?.GetMSComponent<MSTransform>().Refresh();
             });
         }

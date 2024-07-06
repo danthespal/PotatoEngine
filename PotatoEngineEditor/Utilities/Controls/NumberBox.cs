@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -99,7 +94,7 @@ namespace PotatoEngineEditor.Utilities.Controls
 
         static NumberBox()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(NumberBox), 
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(NumberBox),
                 new FrameworkPropertyMetadata(typeof(NumberBox)));
         }
     }

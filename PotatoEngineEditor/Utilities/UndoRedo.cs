@@ -43,7 +43,7 @@ namespace PotatoEngineEditor.Utilities
         }
 
         public UndoRedoAction(string property, object instance, object undoValue, object redoValue, string name) :
-            this (
+            this(
                 () => instance.GetType().GetProperty(property).SetValue(instance, undoValue),
                 () => instance.GetType().GetProperty(property).SetValue(instance, redoValue),
                 name)
