@@ -53,7 +53,7 @@ script_ptr create_script(game_entity::entity entity)
 #define REGISTER_SCRIPT(TYPE)									        \
 		class TYPE;                                                     \
 		namespace {														\
-		const u8 _reg##TYPE												\
+		const u8 _reg_##TYPE											\
 		{ PotatoEngine::script::detail::register_script(				\
 			PotatoEngine::script::detail::string_hash()(#TYPE),			\
 			&PotatoEngine::script::detail::create_script<TYPE> )};      \

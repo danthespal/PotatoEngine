@@ -1,5 +1,6 @@
 ﻿using PotatoEngineEditor.GameProject;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 
 namespace PotatoEngineEditor
@@ -9,6 +10,8 @@ namespace PotatoEngineEditor
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static string PotatoPath { get; private set; } = @"D:\TOOLS\GameEngine\PotatoEngine";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -19,7 +22,30 @@ namespace PotatoEngineEditor
         private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
         {
             Loaded -= OnMainWindowLoaded;
+            GetEnginePath();
             OpenProjectBrowserDialog();
+        }
+
+        private void GetEnginePath()
+        {
+            var potatoPath = Environment.GetEnvironmentVariable("POTATO_ENGINE", EnvironmentVariableTarget.User);
+            if (potatoPath == null || !Directory.Exists(Path.Combine(potatoPath, @"PotatoEngine\EngineAPI")))
+            {
+                var dlg = new EnginePathDialog();
+                if (dlg.ShowDialog() == true)
+                {
+                    PotatoPath = dlg.PotatoPath;
+                    Environment.SetEnvironmentVariable("POTATO_ENGINE", PotatoPath.ToUpper(), EnvironmentVariableTarget.User);
+                }
+                else
+                {
+                    Application.Current.Shutdown();
+                }
+            }
+            else
+            {
+                PotatoPath = potatoPath;
+            }
         }
 
         private void OnMainWindowClosing(object? sender, CancelEventArgs e)
