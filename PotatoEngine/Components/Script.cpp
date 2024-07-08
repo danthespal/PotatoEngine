@@ -21,6 +21,18 @@ registry()
 	return reg;
 }
 
+#ifdef USE_WITH_EDITOR
+utl::vector<std::string>&
+script_names()
+{
+	// NOTE: put this static variable in a function because of
+	//		 the initialization order of static data. this way
+	//		 can be certain that the data is initialized before accessing it.
+	static utl::vector<std::string> names;
+	return names;
+}
+#endif
+
 bool
 exists(script_id id)
 {
@@ -43,6 +55,25 @@ register_script(size_t tag, script_creator func)
 	assert(result);
 	return result;
 }
+
+script_creator
+get_script_creator(size_t tag)
+{
+	auto script = PotatoEngine::script::registry().find(tag);
+	assert(script != PotatoEngine::script::registry().end() && script->first == tag);
+	return script->second;
+}
+
+#ifdef USE_WITH_EDITOR
+u8
+add_script_name(const char* name)
+{
+	script_names().emplace_back(name);
+	return true;
+}
+#endif // USE_WITH_EDITOR
+
+
 } // namespace detail
 
 component
@@ -87,3 +118,21 @@ remove(component c)
 	id_mapping[id::index(id)] = id::invalid_id;
 }
 }
+
+#ifdef USE_WITH_EDITOR
+#include <atlsafe.h>
+
+extern "C" __declspec(dllexport)
+LPSAFEARRAY
+get_script_names()
+{
+	const u32 size{ (u32)PotatoEngine::script::script_names().size() };
+	if (!size) return nullptr;
+	CComSafeArray<BSTR> names(size);
+	for (u32 i{ 0 }; i < size; ++i)
+	{
+		names.SetAt(i, A2BSTR_EX(PotatoEngine::script::script_names()[i].c_str()), false);
+	}
+	return names.Detach();
+}
+#endif // USE_WITH_EDITOR
