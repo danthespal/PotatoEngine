@@ -1,11 +1,26 @@
 ﻿using PotatoEngineEditor.Components;
 using PotatoEngineEditor.GameProject;
 using PotatoEngineEditor.Utilities;
+using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 
 namespace PotatoEngineEditor.Editors
 {
+    public class NullableBoolToBoolConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value is bool b && b == true;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value is bool b && b == true;
+        }
+    }
+
     public partial class GameEntityView : UserControl
     {
         private Action _undoAction;

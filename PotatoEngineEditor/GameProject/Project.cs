@@ -1,4 +1,5 @@
 ﻿using PotatoEngineEditor.Common;
+using PotatoEngineEditor.Components;
 using PotatoEngineEditor.DllWrapper;
 using PotatoEngineEditor.GameDev;
 using PotatoEngineEditor.Utilities;
@@ -156,6 +157,7 @@ namespace PotatoEngineEditor.GameProject
 
         public void Unload()
         {
+            UnloadGameCodeDll();
             VisualStudio.CloseVisualStudio();
             UndoRedo.Reset();
         }
@@ -192,6 +194,7 @@ namespace PotatoEngineEditor.GameProject
             if (File.Exists(dll) && EngineAPI.LoadGameCodeDll(dll) != 0)
             {
                 AvailableScripts = EngineAPI.GetScriptNames();
+                ActiveScene.GameEntities.Where(x => x.GetComponent<Script>() != null).ToList().ForEach(x => x.IsActive = true);
                 Logger.Log(MessageType.Info, "Game code DLL loaded successfully");
             }
             else
@@ -202,6 +205,7 @@ namespace PotatoEngineEditor.GameProject
 
         private void UnloadGameCodeDll()
         { 
+            ActiveScene.GameEntities.Where(x => x.GetComponent<Script>() != null).ToList().ForEach(x => x.IsActive = false);
             if (EngineAPI.UnloadGameCodeDll() != 0)
             {
                 Logger.Log(MessageType.Info, "Game code DLL unloaded");
@@ -218,6 +222,7 @@ namespace PotatoEngineEditor.GameProject
                 OnPropertyChanged(nameof(Scenes));
             }
             ActiveScene = Scenes.FirstOrDefault(x => x.IsActive);
+            Debug.Assert(ActiveScene != null);
 
             await BuildGameCodeDll(false);
 

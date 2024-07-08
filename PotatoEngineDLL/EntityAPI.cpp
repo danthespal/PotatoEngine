@@ -3,41 +3,55 @@
 #include "Id.h"
 #include "..\PotatoEngine\Components\Entity.h"
 #include "..\PotatoEngine\Components\Transform.h"
+#include "..\PotatoEngine\Components\Script.h"
 
 using namespace PotatoEngine;
 
 namespace {
 
-	struct transform_component
-	{
-		f32 position[3];
-		f32 rotation[3];
-		f32 scale[3];
+struct transform_component
+{
+	f32 position[3];
+	f32 rotation[3];
+	f32 scale[3];
 
-		transform::init_info to_init_info()
-		{
-			using namespace DirectX;
-			transform::init_info info{};
-			memcpy(&info.position[0], &position[0], sizeof(f32) * _countof(position));
-			memcpy(&info.scale[0], &scale[0], sizeof(f32) * _countof(position));
-			XMFLOAT3A rot{ &rotation[0] };
-			XMVECTOR quat{ XMQuaternionRotationRollPitchYawFromVector(XMLoadFloat3A(&rot)) };
-			XMFLOAT4A rot_quat{};
-			XMStoreFloat4A(&rot_quat, quat);
-			memcpy(&info.rotation[0], &rot_quat.x, sizeof(f32) * _countof(info.rotation));
-			return info;
-		}
-	};
-
-	struct game_entity_descriptor
+	transform::init_info to_init_info()
 	{
-		transform_component transform;
-	};
-
-	game_entity::entity entity_from_id(id::id_type id)
-	{
-		return game_entity::entity{ game_entity::entity_id{id} };
+		using namespace DirectX;
+		transform::init_info info{};
+		memcpy(&info.position[0], &position[0], sizeof(f32) * _countof(position));
+		memcpy(&info.scale[0], &scale[0], sizeof(f32) * _countof(position));
+		XMFLOAT3A rot{ &rotation[0] };
+		XMVECTOR quat{ XMQuaternionRotationRollPitchYawFromVector(XMLoadFloat3A(&rot)) };
+		XMFLOAT4A rot_quat{};
+		XMStoreFloat4A(&rot_quat, quat);
+		memcpy(&info.rotation[0], &rot_quat.x, sizeof(f32) * _countof(info.rotation));
+		return info;
 	}
+};
+
+struct script_component
+{
+	script::detail::script_creator script_creator;
+
+	script::init_info to_init_info()
+	{
+		script::init_info info{};
+		info.script_creator = script_creator;
+		return info;
+	}
+};
+
+struct game_entity_descriptor
+{
+	transform_component transform;
+	script_component script;
+};
+
+game_entity::entity entity_from_id(id::id_type id)
+{
+	return game_entity::entity{ game_entity::entity_id{id} };
+}
 
 } // anonymous namespace
 
@@ -47,9 +61,11 @@ CreateGameEntity(game_entity_descriptor* e)
 	assert(e);
 	game_entity_descriptor& desc{ *e };
 	transform::init_info transform_info{ desc.transform.to_init_info() };
+	script::init_info script_info{ desc.script.to_init_info() };
 	game_entity::entity_info entity_info
 	{
 		&transform_info,
+		&script_info,
 	};
 	return game_entity::create(entity_info).get_id();
 }
