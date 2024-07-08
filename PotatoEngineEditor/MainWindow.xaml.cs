@@ -5,12 +5,9 @@ using System.Windows;
 
 namespace PotatoEngineEditor
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        public static string PotatoPath { get; private set; } = @"D:\TOOLS\GameEngine\PotatoEngine";
+        public static string PotatoPath { get; private set; }
 
         public MainWindow()
         {

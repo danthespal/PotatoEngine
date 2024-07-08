@@ -18,7 +18,7 @@ namespace PotatoEngineEditor.Utilities.Controls
             set => SetValue(VectorTypeProperty, value);
         }
 
-        private static readonly DependencyProperty VectorTypeProperty =
+        public static readonly DependencyProperty VectorTypeProperty =
             DependencyProperty.Register(nameof(VectorType), typeof(VectorType), typeof(VectorBox),
                 new PropertyMetadata(VectorType.Vector3));
 
@@ -28,7 +28,7 @@ namespace PotatoEngineEditor.Utilities.Controls
             set => SetValue(OrientationProperty, value);
         }
 
-        private static readonly DependencyProperty OrientationProperty =
+        public static readonly DependencyProperty OrientationProperty =
             DependencyProperty.Register(nameof(Orientation), typeof(Orientation), typeof(VectorBox),
                 new PropertyMetadata(Orientation.Horizontal));
 
@@ -38,7 +38,7 @@ namespace PotatoEngineEditor.Utilities.Controls
             set => SetValue(MultiplierProperty, value);
         }
 
-        private static readonly DependencyProperty MultiplierProperty =
+        public static readonly DependencyProperty MultiplierProperty =
             DependencyProperty.Register(nameof(Multiplier), typeof(double), typeof(VectorBox),
                 new PropertyMetadata(1.0));
 
@@ -48,7 +48,7 @@ namespace PotatoEngineEditor.Utilities.Controls
             set => SetValue(XProperty, value);
         }
 
-        private static readonly DependencyProperty XProperty =
+        public static readonly DependencyProperty XProperty =
             DependencyProperty.Register(nameof(X), typeof(string), typeof(VectorBox),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
@@ -58,7 +58,7 @@ namespace PotatoEngineEditor.Utilities.Controls
             set => SetValue(YProperty, value);
         }
 
-        private static readonly DependencyProperty YProperty =
+        public static readonly DependencyProperty YProperty =
             DependencyProperty.Register(nameof(Y), typeof(string), typeof(VectorBox),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
@@ -68,7 +68,7 @@ namespace PotatoEngineEditor.Utilities.Controls
             set => SetValue(ZProperty, value);
         }
 
-        private static readonly DependencyProperty ZProperty =
+        public static readonly DependencyProperty ZProperty =
             DependencyProperty.Register(nameof(Z), typeof(string), typeof(VectorBox),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
@@ -78,7 +78,7 @@ namespace PotatoEngineEditor.Utilities.Controls
             set => SetValue(WProperty, value);
         }
 
-        private static readonly DependencyProperty WProperty =
+        public static readonly DependencyProperty WProperty =
             DependencyProperty.Register(nameof(W), typeof(string), typeof(VectorBox),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 

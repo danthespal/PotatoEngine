@@ -20,7 +20,7 @@ namespace PotatoEngineEditor.Utilities.Controls
             set => SetValue(MultiplierProperty, value);
         }
 
-        private static readonly DependencyProperty MultiplierProperty =
+        public static readonly DependencyProperty MultiplierProperty =
             DependencyProperty.Register(nameof(Multiplier), typeof(double), typeof(NumberBox),
                 new PropertyMetadata(1.0));
 
@@ -30,7 +30,7 @@ namespace PotatoEngineEditor.Utilities.Controls
             set => SetValue(ValueProperty, value);
         }
 
-        private static readonly DependencyProperty ValueProperty =
+        public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(nameof(Value), typeof(string), typeof(NumberBox),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
@@ -84,7 +84,8 @@ namespace PotatoEngineEditor.Utilities.Controls
                 {
                     if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control)) _multiplier = 0.001;
                     else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift)) _multiplier = 0.1;
-                    else _multiplier = 0.1;
+                    else _multiplier = 0.01;
+
                     var newValue = _originalValue + (d * _multiplier * Multiplier);
                     Value = newValue.ToString("0.#####");
                     _valueChanged = true;
