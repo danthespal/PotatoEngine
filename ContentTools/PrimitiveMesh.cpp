@@ -145,7 +145,7 @@ CreatePrimitiveMesh(scene_data* data, primitive_init_info* info)
 	creators[info->type](scene, *info);
 
 	data->settings.calculate_normals = 1;
-	proces_scene(scene, data->settings);
+	process_scene(scene, data->settings);
 	pack_data(scene, *data);
 }
 
