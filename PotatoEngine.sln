@@ -11,6 +11,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PotatoEngine", "PotatoEngine\PotatoEngine.vcxproj", "{CB377B25-DF9F-4546-9143-6E27B890045F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PotatoEngineTest", "PotatoEngineTest\PotatoEngineTest.vcxproj", "{AFD6974C-884A-4C15-8D8A-28E80B10983B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CB377B25-DF9F-4546-9143-6E27B890045F} = {CB377B25-DF9F-4546-9143-6E27B890045F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PotatoEngineDLL", "PotatoEngineDLL\PotatoEngineDLL.vcxproj", "{E4C90CE9-EE73-403E-A848-80B4EAE30A67}"
 	ProjectSection(ProjectDependencies) = postProject
