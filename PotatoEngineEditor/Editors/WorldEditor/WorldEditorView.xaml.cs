@@ -1,4 +1,5 @@
-﻿using PotatoEngineEditor.GameDev;
+﻿using PotatoEngineEditor.Content;
+using PotatoEngineEditor.GameDev;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -21,6 +22,12 @@ namespace PotatoEngineEditor.Editors
         private void OnNewScript_Button_Click(object sender, RoutedEventArgs e)
         {
             new NewScriptDialog().ShowDialog();
+        }
+
+        private void OnCreatePrimitiveMesh_Button_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new PrimitiveMeshDialog();
+            dlg.ShowDialog();
         }
     }
 }
