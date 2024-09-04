@@ -27,7 +27,7 @@ namespace PotatoEngineEditor.Content
 
         private void OnSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => UpdatePrimitive();
 
-        private void OnScalar_ValueChanged(object sender, RoutedEventArgs e) => UpdatePrimitive();
+        private void OnScalarBox_ValueChanged(object sender, RoutedEventArgs e) => UpdatePrimitive();
 
         private float Value(ScalarBox scalarBox, float min)
         {

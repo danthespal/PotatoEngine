@@ -83,6 +83,7 @@ namespace PotatoEngineEditor.Editors
                 if (_cameraPosition != value)
                 {
                     _cameraPosition = value;
+                    CameraDirection = new Vector3D(-value.X, -value.Y, -value.Z);
                     OnPropertyChanged(nameof(OffsetCameraPosition));
                     OnPropertyChanged(nameof(CameraPosition));
                 }
@@ -171,7 +172,7 @@ namespace PotatoEngineEditor.Editors
             // in order to set up camera position and target properly, I need to figure out how big
             // this object is that's rendering. Hence, I need to know its bouding box
             double minX, minY, minZ; minX = minY = minZ = double.MaxValue;
-            double maxX, maxY, maxZ; maxX = maxY = maxZ = double.MaxValue;
+            double maxX, maxY, maxZ; maxX = maxY = maxZ = double.MinValue;
             Vector3D avgNormal = new Vector3D();
             // this is to unpack the packed normals:
             var intervals = 2.0f / ((1 << 16) - 1);
@@ -198,7 +199,7 @@ namespace PotatoEngineEditor.Editors
                         // read normals
                         var nrmX = reader.ReadUInt16() * intervals - 1.0f;
                         var nrmY = reader.ReadUInt16() * intervals - 1.0f;
-                        var nrmZ = Math.Sqrt(Math.Clamp(1f - (nrmX * nrmX + nrmY * nrmY), 0.0f, 1.0f)) * ((signs & 0x2) - 1f);
+                        var nrmZ = Math.Sqrt(Math.Clamp(1f - (nrmX * nrmX + nrmY * nrmY), 0f, 1f)) * ((signs & 0x2) - 1f);
                         var normal = new Vector3D(nrmX, nrmY, nrmZ);
                         normal.Normalize();
                         vertexData.Normals.Add(normal);
@@ -241,7 +242,7 @@ namespace PotatoEngineEditor.Editors
                 {
                     avgNormal.Normalize();
                     avgNormal *= radius;
-                    CameraPosition = new Point3D(avgNormal.X, avgNormal.Y, avgNormal.Y);
+                    CameraPosition = new Point3D(avgNormal.X, avgNormal.Y, avgNormal.Z);
                 }
                 else
                 {
@@ -285,7 +286,7 @@ namespace PotatoEngineEditor.Editors
             }
         }
 
-        public void SetAsset(Content.Asset asset)
+        public void SetAsset(Asset asset)
         {
             Debug.Assert(asset is Content.Geometry);
             if (asset is Content.Geometry geometry)

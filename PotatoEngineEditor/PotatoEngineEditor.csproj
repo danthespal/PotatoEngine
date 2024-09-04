@@ -17,5 +17,4 @@
     <PackageReference Include="envdte" Version="17.10.40170" />
     <PackageReference Include="envdte80" Version="17.10.40170" />
   </ItemGroup>
-
 </Project>
