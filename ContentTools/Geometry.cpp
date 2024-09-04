@@ -68,8 +68,8 @@ process_normals(mesh& m, f32 smoothing_angle)
 					XMVECTOR n2{ XMLoadFloat3(&m.normals[refs[k]]) };
 					if (!is_soft_edge)
 					{
-						// NOTE: we're accounting for the length of n1 in this calculation because
-						//       it can possibly change in this loop interation. we asume unit length
+						// NOTE:I're accounting for the length of n1 in this calculation because
+						//       it can possibly change in this loop interation.I asume unit length
 						//       for n2.
 						//       cos(angle) = dot(n1, n2) / (||n1||*||n2||)
 						XMStoreFloat(&cos_theta, XMVector3Dot(n1, n2) * XMVector3ReciprocalLength(n1));

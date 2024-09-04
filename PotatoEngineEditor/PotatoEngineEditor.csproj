@@ -12,6 +12,7 @@
     <Configurations>DebugEditor;ReleaseEditor</Configurations>
     <Platforms>x64</Platforms>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="envdte" Version="17.10.40170" />
     <PackageReference Include="envdte80" Version="17.10.40170" />

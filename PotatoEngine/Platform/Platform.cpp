@@ -120,7 +120,7 @@ resize_window(window_id id, u32 width, u32 height)
 {
     window_info& info{ get_from_id(id) };
 
-    // NOTE: when we host the window in the level editor we just update
+    // NOTE: whenI host the window in the level editorI just update
     //       the internal data (e.x. the client area dimensions).
     if (info.style & WS_CHILD)
     {
@@ -128,7 +128,7 @@ resize_window(window_id id, u32 width, u32 height)
     }
     else
     {
-        // NOTE: we also resize while in fullscreen mode to support the case
+        // NOTE:I also resize while in fullscreen mode to support the case
         //       when the user changes the screen resolution
         RECT& area{ info.is_fullscreen ? info.fullscreen_area : info.client_area };
         area.bottom = area.top + height;

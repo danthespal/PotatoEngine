@@ -1,5 +1,6 @@
 ﻿using PotatoEngineEditor.ContentToolsAPIStructs;
 using PotatoEngineEditor.DllWrapper;
+using PotatoEngineEditor.Editors;
 using PotatoEngineEditor.Utilities.Controls;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,7 @@ namespace PotatoEngineEditor.Content
 
             var geometry = new Geometry();
             ContentToolsAPI.CreatePrimitiveMesh(geometry, info);
+            (DataContext as GeometryEditor).SetAsset(geometry);
         }
 
         public PrimitiveMeshDialog()
