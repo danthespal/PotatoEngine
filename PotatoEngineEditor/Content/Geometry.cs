@@ -8,6 +8,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace PotatoEngineEditor.Content
 {
@@ -230,6 +233,16 @@ namespace PotatoEngineEditor.Content
             ImportEmbeddedTextures = true;
             ImportAnimations = true;
         }
+
+        public void ToBinary(BinaryWriter writer)
+        {
+            writer.Write(CalculateNormals);
+            writer.Write(CalculateTangents);
+            writer.Write(SmoothingAngle);
+            writer.Write(ReverseHandedness);
+            writer.Write(ImportEmbeddedTextures);
+            writer.Write(ImportAnimations);
+        }
     }
 
     class Geometry : Asset
@@ -374,8 +387,20 @@ namespace PotatoEngineEditor.Content
 
                         Hash = ContentHelper.ComputeHash(hashes.ToArray());
                         data = (writer.BaseStream as MemoryStream).ToArray();
-                        //Icon = GenerateIcon(lodGroup.LODs[0]);
+                        Icon = GenerateIcon(lodGroup.LODs[0]);
                     }
+
+                    Debug.Assert(data?.Length > 0);
+
+                    using (var writer = new BinaryWriter(File.Open(meshFileName, FileMode.Create, FileAccess.Write)))
+                    {
+                        WriteAssetFileHeader(writer);
+                        ImportSettings.ToBinary(writer);
+                        writer.Write(data.Length);
+                        writer.Write(data);
+                    }
+
+                    savedFiles.Add(meshFileName);
                 }
             }
             catch (Exception ex)
@@ -410,6 +435,30 @@ namespace PotatoEngineEditor.Content
             Debug.Assert(meshDataSize > 0);
             var buffer = (writer.BaseStream as MemoryStream).ToArray();
             hash = ContentHelper.ComputeHash(buffer, (int)meshDataBegin, (int)meshDataSize);
+        }
+
+        private byte[] GenerateIcon(MeshLOD lod)
+        {
+            var width = 90 * 4;
+
+            BitmapSource bmp = null;
+            // NOTE: it's not a good practice to use a WPF control (view) as the ViewModel
+            //       but I need to make an exception for this case, for as long as I don't
+            //       have a graphics renderer that we can use for screenshots
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                bmp = Editors.GeometryView.RenderToBitmap(new Editors.MeshRenderer(lod, null), width, width);
+                bmp = new TransformedBitmap(bmp, new ScaleTransform(0.25, 0.25, 0.5, 0.5));
+            });
+
+            using var memStream = new MemoryStream();
+            memStream.SetLength(0);
+
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bmp));
+            encoder.Save(memStream);
+
+            return memStream.ToArray();
         }
 
         public Geometry() : base(AssetType.Mesh) { }
