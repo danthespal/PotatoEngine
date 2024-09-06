@@ -20,5 +20,5 @@ enum class graphics_platform : u32
 
 bool initialize(graphics_platform platform);
 void shutdown();
-
+void render();
 }
