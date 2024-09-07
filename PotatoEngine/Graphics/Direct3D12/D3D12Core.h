@@ -17,4 +17,6 @@ constexpr void release(T*& resource)
 	}
 }
 
+ID3D12Device *const device();
+
 }

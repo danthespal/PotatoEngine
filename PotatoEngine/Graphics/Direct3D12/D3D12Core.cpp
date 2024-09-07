@@ -150,13 +150,13 @@ private:
 		}
 	};
 
-	ID3D12CommandQueue* _cmd_queue{ nullptr };
+	ID3D12CommandQueue*			_cmd_queue{ nullptr };
 	ID3D12GraphicsCommandList6* _cmd_list{ nullptr }; 
-	ID3D12Fence1* _fence{ nullptr };
-	u64 _fence_value{ 0 };
-	command_frame _cmd_frames[frame_buffer_count]{};
-	HANDLE _fence_event{ nullptr };
-	u32 _frame_index{ 0 };
+	ID3D12Fence1*				_fence{ nullptr };
+	u64							_fence_value{ 0 };
+	command_frame				_cmd_frames[frame_buffer_count]{};
+	HANDLE						_fence_event{ nullptr };
+	u32							_frame_index{ 0 };
 };
 
 ID3D12Device8* main_device{ nullptr };
@@ -317,6 +317,12 @@ render()
 	// done recording commands. now execute commands,
 	// signal and increment the fence value for next frame
 	gfx_command.end_frame();
+}
+
+ID3D12Device *const
+device()
+{
+	return main_device;
 }
 
 }
