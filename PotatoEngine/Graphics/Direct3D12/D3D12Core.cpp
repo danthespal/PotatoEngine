@@ -1,5 +1,6 @@
 #include "D3D12Core.h"
 #include "D3D12Resources.h"
+#include "D3D12Surface.h"
 
 using namespace Microsoft::WRL;
 
@@ -161,18 +162,19 @@ private:
 	u32							_frame_index{ 0 };
 };
 
-ID3D12Device8*			main_device{ nullptr };
-IDXGIFactory7*			dxgi_factory{ nullptr };
-d3d12_command			gfx_command;
+ID3D12Device8*				main_device{ nullptr };
+IDXGIFactory7*				dxgi_factory{ nullptr };
+d3d12_command				gfx_command;
+utl::vector<d3d12_surface>	surfaces;
 
-descriptor_heap			rtv_desc_heap{ D3D12_DESCRIPTOR_HEAP_TYPE_RTV };
-descriptor_heap			dsv_desc_heap{ D3D12_DESCRIPTOR_HEAP_TYPE_DSV };
-descriptor_heap			srv_desc_heap{ D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV };
-descriptor_heap			uav_desc_heap{ D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV };
+descriptor_heap				rtv_desc_heap{ D3D12_DESCRIPTOR_HEAP_TYPE_RTV };
+descriptor_heap				dsv_desc_heap{ D3D12_DESCRIPTOR_HEAP_TYPE_DSV };
+descriptor_heap				srv_desc_heap{ D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV };
+descriptor_heap				uav_desc_heap{ D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV };
 
-utl::vector<IUnknown*>	deferred_releases[frame_buffer_count]{};
-u32						deferred_releases_flag[frame_buffer_count]{};
-std::mutex				deferred_releases_mutx{};
+utl::vector<IUnknown*>		deferred_releases[frame_buffer_count]{};
+u32							deferred_releases_flag[frame_buffer_count]{};
+std::mutex					deferred_releases_mutex{};
 
 constexpr DXGI_FORMAT render_target_format{ DXGI_FORMAT_R8G8B8A8_UNORM_SRGB };
 constexpr D3D_FEATURE_LEVEL minimum_feature_level{ D3D_FEATURE_LEVEL_11_0 };
@@ -232,7 +234,7 @@ get_max_feature_level(IDXGIAdapter4* adapter)
 void __declspec(noinline)
 process_deferred_releases(u32 frame_idx)
 {
-	std::lock_guard lock{ deferred_releases_mutx };
+	std::lock_guard lock{ deferred_releases_mutex };
 	
 	// NOTE: clear this flag in the beginning. if we'd clear it at the end
 	//		 then it might overwrite some other thread that was trying to set it.
@@ -258,7 +260,7 @@ namespace detail {
 void deferred_release(IUnknown* resource)
 {
 	const u32 frame_idx{ current_frame_index() };
-	std::lock_guard lock{ deferred_releases_mutx };
+	std::lock_guard lock{ deferred_releases_mutex };
 	deferred_releases[frame_idx].push_back(resource);
 	set_deferred_releases_flag();
 }
@@ -382,29 +384,6 @@ shutdown()
 	release(main_device);
 }
 
-void
-render()
-{
-	// wait for the GPU to finish with the command allocator and
-	// reset the allocator once the GPU is done with it.
-	// this frees the memory that was used to store commands
-	gfx_command.begin_frame();
-	ID3D12GraphicsCommandList6* cmd_list{ gfx_command.command_list() };
-
-	const u32 frame_idx{ current_frame_index() };
-	if (deferred_releases_flag[frame_idx])
-	{
-		process_deferred_releases(frame_idx);
-	}
-
-	// record commands
-	// ...
-	//
-	// done recording commands. now execute commands,
-	// signal and increment the fence value for next frame
-	gfx_command.end_frame();
-}
-
 ID3D12Device *const
 device() { return main_device; }
 
@@ -428,5 +407,67 @@ current_frame_index() { return gfx_command.frame_index(); }
 
 void
 set_deferred_releases_flag() { deferred_releases_flag[current_frame_index()] = 1; }
+
+surface
+create_surface(platform::window window)
+{
+	surfaces.emplace_back(window);
+	surface_id id{ (u32)surfaces.size() - 1 };
+	surfaces[id].create_swap_chain(dxgi_factory, gfx_command.command_queue(), render_target_format);
+	return surface{ id };
+}
+
+void
+remove_surface(surface_id id)
+{
+	gfx_command.flush();
+	// TODO: use proper removal of surfaces
+	surfaces[id].~d3d12_surface();
+}
+
+void resize_surface(surface_id id, u32, u32)
+{
+	gfx_command.flush();
+	surfaces[id].resize();
+}
+
+u32
+surface_width(surface_id id)
+{
+	return surfaces[id].width();
+}
+
+u32
+surface_height(surface_id id)
+{
+	return surfaces[id].height();
+}
+
+void
+render_surface(surface_id id)
+{
+	// wait for the GPU to finish with the command allocator and
+	// reset the allocator once the GPU is done with it.
+	// this frees the memory that was used to store commands
+	gfx_command.begin_frame();
+	ID3D12GraphicsCommandList6* cmd_list{ gfx_command.command_list() };
+
+	const u32 frame_idx{ current_frame_index() };
+	if (deferred_releases_flag[frame_idx])
+	{
+		process_deferred_releases(frame_idx);
+	}
+
+	const d3d12_surface& surface{ surfaces[id] };
+
+	// presenting swap chain buffers happens in lockstep with frame buffers
+	surface.present();
+	// record commands
+	// ...
+	//
+	// done recording commands. now execute commands,
+	// signal and increment the fence value for next frame
+	gfx_command.end_frame();
+}
 
 }
