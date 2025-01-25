@@ -15,7 +15,7 @@ public:
 	vector() = default;
 
 	// constructor resizes the vector and initializes 'count' items
-	constexpr vector(u64 count)
+	constexpr explicit vector(u64 count)
 	{
 		resize(count);
 	}
