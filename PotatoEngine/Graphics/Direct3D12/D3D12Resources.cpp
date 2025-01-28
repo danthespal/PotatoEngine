@@ -1,6 +1,6 @@
 #include "D3D12Resources.h"
 #include "D3D12Core.h"
-#include "D3D12Helper.h"
+#include "D3D12Helpers.h"
 
 namespace PotatoEngine::graphics::d3d12 {
 //// DESCRIPTOR HEAP //////////////////////////////////////////////////////////////
