@@ -6,6 +6,7 @@ namespace PotatoEngine::graphics::d3d12 {
 class d3d12_surface
 {
 public:
+	constexpr static DXGI_FORMAT default_back_buffer_format{ DXGI_FORMAT_R8G8B8A8_UNORM_SRGB };
 	constexpr static u32 buffer_count{ 3 };
 
 	explicit d3d12_surface(platform::window window)
@@ -21,7 +22,7 @@ public:
 		, _viewport{ o._viewport }, _scissor_rect{ o._scissor_rect }, _allow_tearing{ o._allow_tearing }
 		, _present_flags{ o._present_flags }
 	{
-		for (u32 i{ 0 }; i < frame_buffer_count; ++i)
+		for (u32 i{ 0 }; i < buffer_count; ++i)
 		{
 			_render_target_data[i].resource = o._render_target_data[i].resource;
 			_render_target_data[i].rtv = o._render_target_data[i].rtv;
@@ -46,7 +47,7 @@ public:
 #endif // USE_STL_VECTOR
 	~d3d12_surface() { release(); }
 
-	void create_swap_chain(IDXGIFactory7* factory, ID3D12CommandQueue* cmd_queue, DXGI_FORMAT format);
+	void create_swap_chain(IDXGIFactory7* factory, ID3D12CommandQueue* cmd_queue, DXGI_FORMAT format = default_back_buffer_format);
 	void present() const;
 	void resize();
 
@@ -58,14 +59,14 @@ public:
 	constexpr const D3D12_RECT& scissor_rect() const { return _scissor_rect; }
 
 private:
-	void release();
 	void finalize();
+	void release();
 
 #if USE_STL_VECTOR
 	constexpr void move(d3d12_surface& o)
 	{
 		_swap_chain = o._swap_chain;
-		for (u32 i{ 0 }; i < frame_buffer_count; ++i)
+		for (u32 i{ 0 }; i < buffer_count; ++i)
 		{
 			_render_target_data[i] = o._render_target_data[i];
 		}
@@ -105,6 +106,7 @@ private:
 	IDXGISwapChain4*	_swap_chain{ nullptr };
 	render_target_data	_render_target_data[buffer_count]{};
 	platform::window	_window{};
+	DXGI_FORMAT			_format{ default_back_buffer_format };
 	mutable u32			_current_bb_index{ 0 };
 	u32					_allow_tearing{ 0 };
 	u32					_present_flags{ 0 };

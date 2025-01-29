@@ -26,7 +26,7 @@ namespace PotatoEngineEditor.Components
     abstract class MSComponent<T> : ViewModelBase, IMSComponent where T : Component
     {
         private bool _enableUpdates = true;
-        public List<T> SelectedComponets { get; }
+        public List<T> SelectedComponents { get; }
 
         protected abstract bool UpdateComponents(string propertyName);
         protected abstract bool UpdateMSComponent();
@@ -38,10 +38,10 @@ namespace PotatoEngineEditor.Components
             _enableUpdates = true;
         }
 
-        public MSComponent(MSEntity mSEntity)
+        public MSComponent(MSEntity msEntity)
         {
-            Debug.Assert(mSEntity?.SelectedEntities.Any() == true);
-            SelectedComponets = mSEntity.SelectedEntities.Select(entity => entity.GetComponent<T>()).ToList();
+            Debug.Assert(msEntity?.SelectedEntities?.Any() == true);
+            SelectedComponents = msEntity.SelectedEntities.Select(entity => entity.GetComponent<T>()).ToList();
             PropertyChanged += (s, e) => { if (_enableUpdates) UpdateComponents(e.PropertyName); };
         }
     }

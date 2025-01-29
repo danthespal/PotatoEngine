@@ -99,7 +99,7 @@ private:
 		{
 			return true;
 		}
-	};
+	}
 #if USE_STL_VECTOR
 	utl::vector<T>			_array;
 #else

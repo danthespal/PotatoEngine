@@ -1,5 +1,7 @@
 #pragma once
 
+#pragma warning(disable: 4530) // disable exception warning
+
 // C/C++
 #include <stdint.h>
 #include <assert.h>
@@ -26,7 +28,7 @@
 #endif // !DISABLE_MOVE
 
 #ifndef DISABLE_COPY_AND_MOVE
-#define DISABLE_COPY_AND_MOVE(T) DISABLE_COPY(T) DISABLE_MOVE(T);
+#define DISABLE_COPY_AND_MOVE(T) DISABLE_COPY(T) DISABLE_MOVE(T)
 #endif // !DISABLE_COPY_AND_MOVE
 
 #ifdef _DEBUG

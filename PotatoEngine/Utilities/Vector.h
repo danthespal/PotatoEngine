@@ -26,15 +26,6 @@ public:
 		resize(count, value);
 	}
 
-	template<typename it, typename = std::enable_if_t<std::_Is_iterator_v<it>>>
-	constexpr explicit vector(it first, it last)
-	{
-		for (; first != last; ++first)
-		{
-			emplace_back(*first);
-		}
-	}
-
 	// copy-constructor. constructs by copying another vector
 	// the items in the copied vector must be copyable
 	constexpr vector(const vector& o)
@@ -44,7 +35,7 @@ public:
 
 	// move-constructor. constructs by moving another vector
 	// the original vector will be empty after move
-	constexpr vector(const vector&& o)
+	constexpr vector(vector&& o)
 		: _capacity{ o._capacity }, _size{ o._size }, _data{ o._data }
 	{
 		o.reset();
@@ -108,7 +99,7 @@ public:
 		}
 		assert(_size < _capacity);
 
-		T* const item{ new (std::addressof(_data[_size])) T(std::forward<params>(p)...) };
+		T *const item{ new (std::addressof(_data[_size])) T(std::forward<params>(p)...) };
 		++_size;
 		return *item;
 	}
@@ -116,7 +107,7 @@ public:
 	// resize the vector and initializes new items with their default value
 	constexpr void resize(u64 new_size)
 	{
-		static_assert(std::is_default_constructible_v<T>,
+		static_assert(std::is_default_constructible<T>::value,
 			"Type must be default-constructible.");
 
 		if (new_size > _size)
@@ -144,7 +135,7 @@ public:
 	// resize the vector and initializes new items by copying 'value'
 	constexpr void resize(u64 new_size, const T& value)
 	{
-		static_assert(std::is_copy_constructible_v<T>,
+		static_assert(std::is_copy_constructible<T>::value,
 			"Type must be copy-constructible.");
 
 		if (new_size > _size)
@@ -187,14 +178,14 @@ public:
 	}
 
 	// removes the item at specified index
-	constexpr T* const erase(u64 index)
+	constexpr T *const erase(u64 index)
 	{
 		assert(_data && index < _size);
 		return erase(std::addressof(_data[index]));
 	}
 
 	// removes the item at specified location
-	constexpr T* const erase(T* const item)
+	constexpr T *const erase(T *const item)
 	{
 		assert(_data && item >= std::addressof(_data[0]) &&
 			item < std::addressof(_data[_size]));

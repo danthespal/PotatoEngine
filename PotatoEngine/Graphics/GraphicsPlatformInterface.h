@@ -1,7 +1,7 @@
 #pragma once
 #include "CommonHeaders.h"
 #include "Renderer.h"
-#include "Platform/Window.h"
+#include "Platform\Window.h"
 
 namespace PotatoEngine::graphics {
 struct platform_interface

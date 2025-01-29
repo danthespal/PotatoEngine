@@ -62,8 +62,7 @@ namespace PotatoEngineEditor.Components
             bw.Write(_scale.X); bw.Write(_scale.Y); bw.Write(_scale.Z);
         }
 
-        public Transform(GameEntity owner) : base(owner)
-        { }
+        public Transform(GameEntity owner) : base(owner) { }
     }
 
     sealed class MSTransform : MSComponent<Transform>
@@ -201,19 +200,19 @@ namespace PotatoEngineEditor.Components
                 case nameof(PosX):
                 case nameof(PosY):
                 case nameof(PosZ):
-                    SelectedComponets.ForEach(c => c.Position = new Vector3(_posX ?? c.Position.X, _posY ?? c.Position.Y, _posZ ?? c.Position.Z));
+                    SelectedComponents.ForEach(c => c.Position = new Vector3(_posX ?? c.Position.X, _posY ?? c.Position.Y, _posZ ?? c.Position.Z));
                     return true;
 
                 case nameof(RotX):
                 case nameof(RotY):
                 case nameof(RotZ):
-                    SelectedComponets.ForEach(c => c.Rotation = new Vector3(_rotX ?? c.Rotation.X, _rotY ?? c.Rotation.Y, _rotZ ?? c.Rotation.Z));
+                    SelectedComponents.ForEach(c => c.Rotation = new Vector3(_rotX ?? c.Rotation.X, _rotY ?? c.Rotation.Y, _rotZ ?? c.Rotation.Z));
                     return true;
 
                 case nameof(ScaleX):
                 case nameof(ScaleY):
                 case nameof(ScaleZ):
-                    SelectedComponets.ForEach(c => c.Scale = new Vector3(_scaleX ?? c.Scale.X, _scaleY ?? c.Scale.Y, _scaleZ ?? c.Scale.Z));
+                    SelectedComponents.ForEach(c => c.Scale = new Vector3(_scaleX ?? c.Scale.X, _scaleY ?? c.Scale.Y, _scaleZ ?? c.Scale.Z));
                     return true;
             }
             return false;
@@ -221,17 +220,17 @@ namespace PotatoEngineEditor.Components
 
         protected override bool UpdateMSComponent()
         {
-            PosX = MSEntity.GetMixedValue(SelectedComponets, new Func<Transform, float>(x => x.Position.X));
-            PosY = MSEntity.GetMixedValue(SelectedComponets, new Func<Transform, float>(x => x.Position.Y));
-            PosZ = MSEntity.GetMixedValue(SelectedComponets, new Func<Transform, float>(x => x.Position.Z));
+            PosX = MSEntity.GetMixedValue(SelectedComponents, new Func<Transform, float>(x => x.Position.X));
+            PosY = MSEntity.GetMixedValue(SelectedComponents, new Func<Transform, float>(x => x.Position.Y));
+            PosZ = MSEntity.GetMixedValue(SelectedComponents, new Func<Transform, float>(x => x.Position.Z));
 
-            RotX = MSEntity.GetMixedValue(SelectedComponets, new Func<Transform, float>(x => x.Rotation.X));
-            RotY = MSEntity.GetMixedValue(SelectedComponets, new Func<Transform, float>(x => x.Rotation.Y));
-            RotZ = MSEntity.GetMixedValue(SelectedComponets, new Func<Transform, float>(x => x.Rotation.Z));
+            RotX = MSEntity.GetMixedValue(SelectedComponents, new Func<Transform, float>(x => x.Rotation.X));
+            RotY = MSEntity.GetMixedValue(SelectedComponents, new Func<Transform, float>(x => x.Rotation.Y));
+            RotZ = MSEntity.GetMixedValue(SelectedComponents, new Func<Transform, float>(x => x.Rotation.Z));
 
-            ScaleX = MSEntity.GetMixedValue(SelectedComponets, new Func<Transform, float>(x => x.Scale.X));
-            ScaleY = MSEntity.GetMixedValue(SelectedComponets, new Func<Transform, float>(x => x.Scale.Y));
-            ScaleZ = MSEntity.GetMixedValue(SelectedComponets, new Func<Transform, float>(x => x.Scale.Z));
+            ScaleX = MSEntity.GetMixedValue(SelectedComponents, new Func<Transform, float>(x => x.Scale.X));
+            ScaleY = MSEntity.GetMixedValue(SelectedComponents, new Func<Transform, float>(x => x.Scale.Y));
+            ScaleZ = MSEntity.GetMixedValue(SelectedComponents, new Func<Transform, float>(x => x.Scale.Z));
 
             return true;
         }

@@ -124,7 +124,7 @@ public:
 	constexpr d3d12_render_texture(d3d12_render_texture&& o)
 		: _texture{ std::move(o._texture) }, _mip_count{ o._mip_count }
 	{
-		for (u32 i{ 0 }; i < _mip_count; i++) _rtv[i] = o._rtv[i];
+		for (u32 i{ 0 }; i < _mip_count; ++i) _rtv[i] = o._rtv[i];
 		o.reset();
 	}
 

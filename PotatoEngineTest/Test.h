@@ -28,30 +28,30 @@ public:
 		_start = clock::now();
 	}
 
-	void end()
-	{
-		auto dt = clock::now() - _start;
-		_msg_avg += ((float)std::chrono::duration_cast<std::chrono::milliseconds>(dt).count() - _msg_avg) / (float)_counter;
-		++_counter;
+    void end()
+    {
+        auto dt = clock::now() - _start;
+        _ms_avg += ((float)std::chrono::duration_cast<std::chrono::milliseconds>(dt).count() - _ms_avg) / (float)_counter;
+        ++_counter;
 
-		if (std::chrono::duration_cast<std::chrono::seconds>(clock::now() - _seconds).count() >= 1)
-		{
-			OutputDebugStringA("Avg. frame (ms): ");
-			OutputDebugStringA(std::to_string(_msg_avg).c_str());
-			OutputDebugStringA((" " + std::to_string(_counter)).c_str());
-			OutputDebugStringA(" fps");
-			OutputDebugStringA("\n");
-			_msg_avg = 0.f;
-			_counter = 1;
-			_seconds = clock::now();
-		}
-	}
+        if (std::chrono::duration_cast<std::chrono::seconds>(clock::now() - _seconds).count() >= 1)
+        {
+            OutputDebugStringA("Avg. frame (ms): ");
+            OutputDebugStringA(std::to_string(_ms_avg).c_str());
+            OutputDebugStringA((" " + std::to_string(_counter)).c_str());
+            OutputDebugStringA(" fps");
+            OutputDebugStringA("\n");
+            _ms_avg = 0.f;
+            _counter = 1;
+            _seconds = clock::now();
+        }
+    }
 
 private:
-	float			_msg_avg{ 0.f };
-	int				_counter{ 1 };
-	time_stamp		_start;
-	time_stamp		_seconds{ clock::now() };
+    float       _ms_avg{ 0.f };
+    int         _counter{ 1 };
+    time_stamp  _start;
+    time_stamp  _seconds{ clock::now() };
 };
 #endif // _WIN64
 

@@ -303,13 +303,13 @@ namespace PotatoEngineEditor.Content
             var lodList = new List<MeshLOD>();
             for (int i = 0; i < numMeshes; ++i)
             {
-                ReadMeshesh(reader, lodIds, lodList);
+                ReadMeshes(reader, lodIds, lodList);
             }
 
             return lodList;
         }
 
-        private static void ReadMeshesh(BinaryReader reader, List<int> lodIds, List<MeshLOD> lodList)
+        private static void ReadMeshes(BinaryReader reader, List<int> lodIds, List<MeshLOD> lodList)
         {
             // get mesh's name
             var s = reader.ReadInt32();
@@ -370,7 +370,7 @@ namespace PotatoEngineEditor.Content
                 {
                     Debug.Assert(lodGroup.LODs.Any());
                     // use the name of most detailed LOD for file name
-                    var meshFileName = ContentHelper.SanitizeFileName(path + fileName + "_" + lodGroup.LODs[0].Name + AssetFileExtension);
+                    var meshFileName = ContentHelper.SanitizerFileName(path + fileName + "_" + lodGroup.LODs[0].Name + AssetFileExtension);
                     // NOTE: i have to make a different id for each new asset file
                     Guid = Guid.NewGuid();
                     byte[] data = null;
@@ -448,7 +448,7 @@ namespace PotatoEngineEditor.Content
             Application.Current.Dispatcher.Invoke(() =>
             {
                 bmp = Editors.GeometryView.RenderToBitmap(new Editors.MeshRenderer(lod, null), width, width);
-                bmp = new TransformedBitmap(bmp, new ScaleTransform(0.25, 0.25, 0.5, 0.5));
+                bmp = new TransformedBitmap(bmp, new ScaleTransform(0.25, 0.25, 0.25, 0.25));
             });
 
             using var memStream = new MemoryStream();

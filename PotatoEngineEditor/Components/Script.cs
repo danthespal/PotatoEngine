@@ -58,7 +58,7 @@ namespace PotatoEngineEditor.Components
         {
             if (propertyName == nameof(Name))
             {
-                SelectedComponets.ForEach(c => c.Name = _name);
+                SelectedComponents.ForEach(c => c.Name = _name);
                 return true;
             }
 
@@ -67,7 +67,7 @@ namespace PotatoEngineEditor.Components
 
         protected override bool UpdateMSComponent()
         {
-            Name = MSEntity.GetMixedValue(SelectedComponets, new Func<Script, string>(x => x.Name));
+            Name = MSEntity.GetMixedValue(SelectedComponents, new Func<Script, string>(x => x.Name));
             return true;
         }
 

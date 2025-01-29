@@ -38,25 +38,25 @@ struct d3d12_root_parameter : public D3D12_ROOT_PARAMETER1
 		Constants.RegisterSpace = space;
 	}
 
-	constexpr void as_cbv(D3D12_SHADER_VISIBILITY visiblity, 
+	constexpr void as_cbv(D3D12_SHADER_VISIBILITY visibility, 
 						  u32 shader_register, u32 space = 0,
 						  D3D12_ROOT_DESCRIPTOR_FLAGS flags = D3D12_ROOT_DESCRIPTOR_FLAG_NONE)
 	{
-		as_descriptor(D3D12_ROOT_PARAMETER_TYPE_CBV, visiblity, shader_register, space, flags);
+		as_descriptor(D3D12_ROOT_PARAMETER_TYPE_CBV, visibility, shader_register, space, flags);
 	}
 
-	constexpr void as_srv(D3D12_SHADER_VISIBILITY visiblity, 
+	constexpr void as_srv(D3D12_SHADER_VISIBILITY visibility,
 						  u32 shader_register, u32 space = 0,
 						  D3D12_ROOT_DESCRIPTOR_FLAGS flags = D3D12_ROOT_DESCRIPTOR_FLAG_NONE)
 	{
-		as_descriptor(D3D12_ROOT_PARAMETER_TYPE_SRV, visiblity, shader_register, space, flags);
+		as_descriptor(D3D12_ROOT_PARAMETER_TYPE_SRV, visibility, shader_register, space, flags);
 	}
 
-	constexpr void as_uav(D3D12_SHADER_VISIBILITY visiblity, 
+	constexpr void as_uav(D3D12_SHADER_VISIBILITY visibility,
 					      u32 shader_register, u32 space = 0,
 						  D3D12_ROOT_DESCRIPTOR_FLAGS flags = D3D12_ROOT_DESCRIPTOR_FLAG_NONE)
 	{
-		as_descriptor(D3D12_ROOT_PARAMETER_TYPE_UAV, visiblity, shader_register, space, flags);
+		as_descriptor(D3D12_ROOT_PARAMETER_TYPE_UAV, visibility, shader_register, space, flags);
 	}
 
 	constexpr void as_descriptor_table(D3D12_SHADER_VISIBILITY visibility,
@@ -112,7 +112,7 @@ class alignas(void*) d3d12_pipeline_state_subobject
 public:
 	d3d12_pipeline_state_subobject() = default;
 	constexpr explicit d3d12_pipeline_state_subobject(T subobject) : _type{ type }, _subobject{ subobject } {}
-	d3d12_pipeline_state_subobject& operator=(const T& suboject) { _subobject = suboject; return *this; }
+	d3d12_pipeline_state_subobject& operator=(const T& subobject) { _subobject = subobject; return *this; }
 private:
 	const D3D12_PIPELINE_STATE_SUBOBJECT_TYPE _type{ type };
 	T _subobject{};

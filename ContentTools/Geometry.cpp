@@ -185,7 +185,7 @@ get_mesh_size(const mesh& m)
 	const u64 vertex_buffer_size{ sizeof(packed_vertex::vertex_static) * num_vertices };
 	const u64 index_size{ (num_vertices < (1 << 16)) ? sizeof(u16) : sizeof(u32) };
 	const u64 index_buffer_size{ index_size * m.indices.size() };
-	constexpr u64 su32{ sizeof(32) };
+	constexpr u64 su32{ sizeof(u32) };
 	const u64 size
 	{
 		su32 + m.name.size() +		// mesh name length and room for mesh name string

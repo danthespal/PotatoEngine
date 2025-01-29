@@ -173,7 +173,7 @@ is_window_closed(window_id id)
 } // anonymous namespace
 
 window
-create_window(const window_init_info* const init_info /* nullptr */)
+create_window(const window_init_info* const init_info /* = nullptr */)
 {
 	window_proc callback{ init_info ? init_info->callback : nullptr };
 	window_handle parent{ init_info ? init_info->parent : nullptr };
@@ -181,7 +181,7 @@ create_window(const window_init_info* const init_info /* nullptr */)
 	// setup a window class
 	WNDCLASSEX wc;
 	ZeroMemory(&wc, sizeof(wc));
-    wc.cbSize = sizeof(WNDCLASSEXW);
+    wc.cbSize = sizeof(WNDCLASSEX);
     wc.style = CS_HREDRAW | CS_VREDRAW;
     wc.lpfnWndProc = internal_window_proc;
     wc.cbClsExtra = 0;
@@ -220,7 +220,7 @@ create_window(const window_init_info* const init_info /* nullptr */)
         wc.lpszClassName,    // window class name
         caption,             // instance title
         info.style,          // window style
-        left, top,           // initial window position
+        left, top,           // initial window positions
         width, height,       // initial window dimension
         parent,              // handle to parent window
         NULL,                // handle to menu
@@ -233,7 +233,7 @@ create_window(const window_init_info* const init_info /* nullptr */)
         const window_id id{ windows.add(info) };
         SetWindowLongPtr(info.hwnd, GWLP_USERDATA, (LONG_PTR)id);
         // set in the "extra" bytes the pointer to the window callback function
-        // which handles messaged for the window
+        // which handles messages for the window
         if (callback) SetWindowLongPtr(info.hwnd, 0, (LONG_PTR)callback);
         assert(GetLastError() == 0);
         ShowWindow(info.hwnd, SW_SHOWNORMAL);

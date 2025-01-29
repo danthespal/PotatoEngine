@@ -36,7 +36,7 @@ namespace PotatoEngineEditor.Editors
                 return null;
             }
 
-            var selection = vm.SelectedComponets.Select(x => selector(x)).ToList();
+            var selection = vm.SelectedComponents.Select(x => selector(x)).ToList();
             return new Action(() =>
             {
                 selection.ForEach(x => forEachAction(x));

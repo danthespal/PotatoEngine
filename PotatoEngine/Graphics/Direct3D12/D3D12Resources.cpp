@@ -111,8 +111,8 @@ descriptor_heap::free(descriptor_handle& handle)
 	const u32 index{ (u32)(handle.cpu.ptr - _cpu_start.ptr) / _descriptor_size };
 	assert(handle.index == index);
 
-	const u32 frame_index{ core::current_frame_index() };
-	_deferred_free_indices[frame_index].push_back(index);
+	const u32 frame_idx{ core::current_frame_index() };
+	_deferred_free_indices[frame_idx].push_back(index);
 	core::set_deferred_releases_flag();
 	handle = {};
 }
@@ -189,7 +189,7 @@ d3d12_render_texture::d3d12_render_texture(d3d12_texture_init_info info)
 void
 d3d12_render_texture::release()
 {
-	for (u32 i{ 0 }; i < _mip_count; i++) core::rtv_heap().free(_rtv[i]);
+	for (u32 i{ 0 }; i < _mip_count; ++i) core::rtv_heap().free(_rtv[i]);
 	_texture.release();
 	_mip_count = 0;
 }
@@ -202,7 +202,7 @@ d3d12_depth_buffer::d3d12_depth_buffer(d3d12_texture_init_info info)
 	D3D12_SHADER_RESOURCE_VIEW_DESC srv_desc{};
 	if (info.desc->Format == DXGI_FORMAT_D32_FLOAT)
 	{
-		info.desc->Format = DXGI_FORMAT_R32_TYPELESS;
+		info.desc->Format == DXGI_FORMAT_R32_TYPELESS;
 		srv_desc.Format = DXGI_FORMAT_R32_FLOAT;
 	}
 
@@ -211,7 +211,7 @@ d3d12_depth_buffer::d3d12_depth_buffer(d3d12_texture_init_info info)
 	srv_desc.Texture2D.MipLevels = 1;
 	srv_desc.Texture2D.MostDetailedMip = 0;
 	srv_desc.Texture2D.PlaneSlice = 0;
-	srv_desc.Texture2D.ResourceMinLODClamp = 0.f;
+	srv_desc.Texture2D.ResourceMinLODClamp = 0;
 
 	assert(!info.srv_desc && !info.resource);
 	info.srv_desc = &srv_desc;

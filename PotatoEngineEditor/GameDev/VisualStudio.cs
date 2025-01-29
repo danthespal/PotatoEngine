@@ -47,7 +47,7 @@ namespace PotatoEngineEditor.GameDev
                         if (name.Contains(_progID))
                         {
                             hResult = rot.GetObject(currentMoniker[0], out object obj);
-                            if (hResult < 0 || obj == null) throw new COMException($"GetRunningObjectTable()->GetObject() returned HRESULT: {hResult:X8}");
+                            if (hResult < 0 || obj == null) throw new COMException($"Running object table's GetObject() returned HRESULT: {hResult:X8}");
 
                             EnvDTE80.DTE2 dte = obj as EnvDTE80.DTE2;
                             var solutionName = dte.Solution.FullName;
@@ -151,7 +151,7 @@ namespace PotatoEngineEditor.GameDev
             bool result = false;
             bool tryAgain = true;
 
-            for (int i = 0; i < 3 && tryAgain; i++)
+            for (int i = 0; i < 3 && tryAgain; ++i)
             {
                 try
                 {
@@ -174,6 +174,7 @@ namespace PotatoEngineEditor.GameDev
             if (IsDebugging())
             {
                 Logger.Log(MessageType.Error, "Visual Studio is currently running a process.");
+                return;
             }
 
             OpenVisualStudio(project.Solution);

@@ -64,14 +64,15 @@ namespace PotatoEngineEditor.Utilities
             _timer.IsEnabled = eventArgs.RepeatEvent;
         }
 
-        public DelayEventTimer(TimeSpan delay, DispatcherPriority priority = DispatcherPriority.Normal)
-        {
-            _delay = delay;
-            _timer = new DispatcherTimer(priority)
-            {
-                Interval = TimeSpan.FromMilliseconds(delay.TotalMilliseconds * 0.5)
-            };
-            _timer.Tick += OnTimerTick;
-        }
-    }
+		public DelayEventTimer(TimeSpan delay, DispatcherPriority priority = DispatcherPriority.Normal)
+		{
+			_delay = delay;
+			_timer = new DispatcherTimer(priority)
+			{
+				Interval = TimeSpan.FromMilliseconds(delay.TotalMilliseconds * 0.5)
+			};
+			_timer.Tick += OnTimerTick;
+
+		}
+	}
 }

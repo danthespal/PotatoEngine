@@ -1,12 +1,12 @@
 #include "Transform.h"
 #include "Entity.h"
 
-namespace PotatoEngine::transform {
-
+namespace PotatoEngine::transform 
+{
 namespace {
-	 
-utl::vector<math::v3> positions;
+
 utl::vector<math::v4> rotations;
+utl::vector<math::v3> positions;
 utl::vector<math::v3> scales;
 
 } // anonymous namespaces
@@ -31,7 +31,8 @@ create(init_info info, game_entity::entity entity)
 		scales.emplace_back(info.scale);
 	}
 
-	return component{ transform_id{ entity.get_id() } };
+	//return component{ transform_id{ entity.get_id() } };
+	return component(transform_id{ (id::id_type)positions.size() - 1 });
 }
 
 void

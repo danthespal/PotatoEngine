@@ -45,11 +45,11 @@ namespace PotatoEngineEditor
             }
         }
 
-        private void OnMainWindowClosing(object? sender, CancelEventArgs e)
-        {
-            Closing -= OnMainWindowClosing;
-            Project.Current?.Unload();
-        }
+		private void OnMainWindowClosing(object sender, CancelEventArgs e)
+		{
+			Closing -= OnMainWindowClosing;
+			Project.Current?.Unload();
+		}
 
         private void OpenProjectBrowserDialog()
         {

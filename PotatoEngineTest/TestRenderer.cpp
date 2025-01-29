@@ -91,7 +91,8 @@ engine_test::initialize()
 
 	for (u32 i{ 0 }; i < _countof(_surfaces); ++i)
 		create_render_surface(_surfaces[i], info[i]);
-	return true;
+
+	return result;
 }
 
 void 
