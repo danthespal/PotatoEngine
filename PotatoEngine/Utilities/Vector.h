@@ -321,28 +321,30 @@ public:
 	// returns a pointer to the first item. returns null when vector is empty
 	[[nodiscard]] constexpr T* begin()
 	{
-		assert(_data);
+		//assert(_data);
 		return std::addressof(_data[0]);
 	}
 
 	// returns a constant pointer to the first item. returns null when vector is empty
 	[[nodiscard]] constexpr const T* begin() const
 	{
-		assert(_data);
+		//assert(_data);
 		return std::addressof(_data[0]);
 	}
 
 	// returns a pointer to the last item. returns null when vector is empty
 	[[nodiscard]] constexpr T* end()
 	{
-		assert(_data);
+		//assert(_data);
+		assert(!(_data == nullptr && _size > 0));
 		return std::addressof(_data[_size]);
 	}
 
 	// returns a constant pointer to the last item. returns null when vector is empty
 	[[nodiscard]] constexpr const T* end() const
 	{
-		assert(_data);
+		//assert(_data);
+		assert(!(_data == nullptr && _size > 0));
 		return std::addressof(_data[_size]);
 	}
 

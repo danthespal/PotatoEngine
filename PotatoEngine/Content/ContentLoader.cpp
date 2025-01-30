@@ -54,7 +54,7 @@ read_script(const u8*& data, game_entity::entity_info& info)
 	// if a script name is longer than 255 characters then something is proably
 	// very wrong, either with the binary writer or the game programmer :D
 	assert(name_length < 256);
-	char script_name[256]{};
+	char script_name[256];
 	memcpy(&script_name[0], data, name_length); data += name_length;
 	// make the name a zero-terminated c-string
 	script_name[name_length] = 0;

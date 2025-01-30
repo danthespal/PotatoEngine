@@ -12,7 +12,9 @@ namespace PotatoEngineEditor.GameDev
     public partial class NewScriptDialog : Window
     {
         private static readonly string _cppCode = @"#include ""{0}.h""
+
 namespace {1} {{
+
 REGISTER_SCRIPT({0});
 void {0}::begin_play()
 {{
@@ -26,7 +28,8 @@ void {0}::update(float dt)
 
 }} // namespace {1}";
 
-        private static readonly string _hCode = @"namespace {1} {{
+        private static readonly string _hCode = @"#pragma once
+namespace {1} {{
 
 class {0} : public PotatoEngine::script::entity_script
 {{
@@ -34,8 +37,8 @@ public:
     constexpr explicit {0}(PotatoEngine::game_entity::entity entity)
         : PotatoEngine::script::entity_script{{entity}} {{}}
 
-void begin_play() override;
-void update(float dt) override;
+    void begin_play() override;
+    void update(float dt) override;
 private:
 }};
 

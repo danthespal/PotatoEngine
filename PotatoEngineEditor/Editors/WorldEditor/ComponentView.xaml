@@ -24,9 +24,7 @@
             </Style>
         </Expander.Style>
         <Expander.Header>
-            <Grid>
-                <TextBlock Text="{Binding Header, ElementName=componentView}" FontWeight="Bold"/>
-            </Grid>
+            <TextBlock Text="{Binding Header, ElementName=componentView}" FontWeight="Bold"/>
         </Expander.Header>
         <ContentPresenter Content="{Binding ComponentContent, ElementName=componentView}" Margin="5"/>
     </Expander>

@@ -122,7 +122,7 @@ namespace PotatoEngineEditor.GameProject
             }
             else
             {
-                ErrorMsg = "";
+                ErrorMsg = string.Empty;
                 IsValid = true;
             }
 

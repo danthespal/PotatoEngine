@@ -41,7 +41,7 @@ namespace PotatoEngineEditor.GameProject
             highlightRect.BeginAnimation(Canvas.LeftProperty, highlightAnimation);
         }
 
-        private void AnimateToProject()
+        private void AnimateToOpenProject()
         {
             var highlightAnimation = new DoubleAnimation(400, 200, new Duration(TimeSpan.FromSeconds(0.2)));
             highlightAnimation.EasingFunction = _easing;
@@ -61,7 +61,7 @@ namespace PotatoEngineEditor.GameProject
                 if (createProjectButton.IsChecked == true)
                 {
                     createProjectButton.IsChecked = false;
-                    AnimateToProject();
+                    AnimateToOpenProject();
                     openProjectView.IsEnabled = true;
                     newProjectView.IsEnabled = false;
                 }

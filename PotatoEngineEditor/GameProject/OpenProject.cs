@@ -25,11 +25,12 @@ namespace PotatoEngineEditor.GameProject
         public byte[] Screenshot { get; set; }
     }
 
-    public class ProjectDataList
-    {
-        [DataMember]
-        public List<ProjectData> Projects { get; set; }
-    }
+	[DataContract]
+	public class ProjectDataList
+	{
+		[DataMember]
+		public List<ProjectData> Projects { get; set; }
+	}
 
     class OpenProject
     {

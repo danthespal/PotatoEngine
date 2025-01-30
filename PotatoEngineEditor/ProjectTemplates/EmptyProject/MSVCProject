@@ -77,7 +77,7 @@
 	<BuildMacro Include="Engine_IncludePath">
 		<Value>$(Engine_IncludePath)</Value>
 	</BuildMacro>
-	<BuildMacro Include="Engine_IncludePath">
+	<BuildMacro Include="Engine_LibraryPath">
 		<Value>$(Engine_LibraryPath)</Value>
 	</BuildMacro>
   </ItemGroup>
